@@ -1,7 +1,11 @@
 package com.shawn.financial_hub;
 
 import org.springframework.stereotype.Service;
+
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Repository;
 import com.shawn.financial_hub.UserRepo;
 import com.shawn.financial_hub.User;
@@ -15,18 +19,25 @@ public class UserService {
         userRepo.save(newUser);
     }
 
-    public void registerUser(User newUser) {
+    public User registerUser(User newUser) {
         if (userRepo.findByUserName(newUser.getUserName()) != null) {
             throw new RuntimeException("Username" + newUser.getUserName() + " is taken.");
         } else {
             saveUser(newUser);
+            return newUser;
         }
     }
 
-    public void login(User existingUser) {
-        if (userRepo.findByUserName(existingUser.getUserName()) and userRepo.findByPassWord(existingUser.getPassword())){
-            
+    public User login(String UserName, String Password) {
+        User existingUser = userRepo.findByUserName(UserName);
+        if (existingUser != null) {
+            if (Password.equals(existingUser.getPassword())) {
+                return existingUser;
+            } else {
+                throw new RuntimeException("Password");
+            }
+        } else {
+            throw new RuntimeException("User does not Exist");
         }
     }
-
 }
