@@ -27,19 +27,19 @@ public class Feed {
         this.id = id;
     };
 
-    public String get_url() {
+    public String getUrl() {
         return url;
     };
 
-    public void set_url(String url) {
+    public void setUrl(String url) {
         this.url = url;
     };
 
-    public User get_user() {
+    public User getUser() {
         return user;
     }
 
-    public void set_user(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

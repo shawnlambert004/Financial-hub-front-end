@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FeedRepo
-        extends JpaRepository<Feed, Long> {
+                extends JpaRepository<Feed, Long> {
+        Feed findByUrl(String url);
 }

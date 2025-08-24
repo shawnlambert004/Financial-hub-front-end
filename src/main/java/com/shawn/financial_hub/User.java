@@ -25,19 +25,19 @@ public class User {
 
     };
 
-    public String get_first_name() {
+    public String getFirstName() {
         return first_name;
     };
 
-    public void set_first_name(String first_name) {
+    public void setFirstName(String first_name) {
         this.first_name = first_name;
     };
 
-    public String get_last_name() {
+    public String getLastName() {
         return last_name;
     };
 
-    public void set_last_name(String last_name) {
+    public void setLastName(String last_name) {
         this.last_name = last_name;
     };
 
@@ -45,7 +45,7 @@ public class User {
         return userName;
     };
 
-    public void set_user_name(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     };
 
@@ -53,15 +53,15 @@ public class User {
         return passWord;
     };
 
-    public void set_password(String passWord) {
+    public void setPassword(String passWord) {
         this.passWord = passWord;
     };
 
-    public Long get_id() {
+    public Long getId() {
         return id;
     };
 
-    public void set_id(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
