@@ -16,14 +16,11 @@ public class Feed {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Feed() {
-    };
-
-    public Long get_id() {
+    public Long getId() {
         return id;
     };
 
-    public void set_id(Long id) {
+    public void setId(Long id) {
         this.id = id;
     };
 
