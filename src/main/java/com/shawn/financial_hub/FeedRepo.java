@@ -8,3 +8,4 @@ public interface FeedRepo
                 extends JpaRepository<Feed, Long> {
         Feed findByUrl(String url);
 }
+// FeedRepo

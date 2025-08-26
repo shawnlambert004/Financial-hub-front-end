@@ -11,3 +11,4 @@ public interface UserRepo
 
         User findByPassWord(String passWord);
 }
+// UserRepo
