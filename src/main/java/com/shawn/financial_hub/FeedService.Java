@@ -8,8 +8,8 @@ import com.shawn.financial_hub.*;
 public class FeedService {
     @Autowired
     FeedRepo feedRepo;
-    
-    public void saveUrl (User user, String url){
+
+    public void saveUrl(User user, String url) {
         Feed feed = new Feed();
         feed.setUrl(url);
         feed.setUser(user);
@@ -23,14 +23,13 @@ public class FeedService {
         }
     }
 
-    public void addUrl (String url, User user){
+    public void addUrl(String url, User user) {
         Feed exFeed = feedRepo.findByUrl(url);
         if (exFeed != null) {
             throw new RuntimeException("url already added");
-        }
-        else {
+        } else {
             saveUrl(user, url);
         }
     }
-    
+
 }

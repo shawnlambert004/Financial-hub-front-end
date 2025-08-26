@@ -1,4 +1,5 @@
 package com.shawn.financial_hub;
+
 import com.shawn.financial_hub.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,16 @@ public class FeedController {
     UserRepo userRepo;
 
     @PostMapping("/addUrl")
-    public void addUrl(@RequestParam String url, @RequestParam Long userId){
+    public void addUrl(@RequestParam String url, @RequestParam Long userId) {
         Optional<User> userPossible = userRepo.findById(userId);
-        if (userPossible.isEmpty()){
+        if (userPossible.isEmpty()) {
             throw new RuntimeException("No User associated with URL");
         }
         User user = userPossible.get();
         feedService.addUrl(url, user);
     }
 
-    @PostMapping("/delUrl") 
+    @PostMapping("/delUrl")
     public void delUrl(@RequestParam String url) {
         feedService.deleteUrl(url);
     }
