@@ -34,7 +34,7 @@ public class UserService {
             if (Password.equals(existingUser.getPassword())) {
                 return existingUser;
             } else {
-                throw new RuntimeException("Password");
+                throw new RuntimeException("Incorrect Password");
             }
         } else {
             throw new RuntimeException("User does not Exist");

@@ -22,7 +22,6 @@ public class User {
     private String passWord;
 
     public User() {
-
     };
 
     public String getFirstName() {
@@ -65,4 +64,4 @@ public class User {
         this.id = id;
     }
 
-} // User.Java
+}
