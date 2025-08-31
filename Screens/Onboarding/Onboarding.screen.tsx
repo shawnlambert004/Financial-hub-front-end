@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function OnboardingScreen() {
     const getStarted = () => {
-        router.replace("/(routes)/login/index");
+        router.replace("/(routes)/login");
     };
     return <View style ={styles.container}>
         <Image 
@@ -12,14 +12,15 @@ export default function OnboardingScreen() {
             style={styles.OnboardPage}
         />
          <View style= {styles.contentContainer}>
-            <Text style={styles.title}>Financial Hub</Text>
+            <Text style={styles.title}>Financial</Text>
+            <Text style={styles.title}>Hub</Text>
             <Text style={styles.subtitle}>At your fingertips</Text>
             <TouchableOpacity style={styles.button} onPress={getStarted}>
                 <Text style={styles.buttonText}>Get Started</Text>
             </TouchableOpacity>
          </View>
         </View>;
-} 
+} // esefe
 
 const styles = StyleSheet.create({
     container : {   
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
         zIndex : 1
     },
     title : {
-        fontSize: 32,
+        fontSize: 40,
         fontWeight: 'bold',
         color: '#FFFFFF',
         marginBottom: 10,
