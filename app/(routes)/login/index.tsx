@@ -1,8 +1,22 @@
-import React from 'react'
-import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from 'react';
+import { Controller, useForm } from "react-hook-form";
+import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import tw from 'twrnc';
 
+interface LoginFormData {
+  username: string;
+  password: string;
+}
 export default function LoginScreen() {
+  const loginForm = useForm<LoginFormData>({
+    mode: "onChange",
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
   return (
     <SafeAreaView style={stylist.container}>
       <Image 
@@ -12,13 +26,33 @@ export default function LoginScreen() {
         behavior = {Platform.OS == "ios"? "padding": "height"}
         style={{flex: 1, paddingBottom: 50, paddingTop: 250, paddingHorizontal: 20, zIndex : 2}}
         >
-          <ScrollView style={{flex: 1}}>
             <Text style={stylist.title}>Welcome</Text>
             <Text style={stylist.title}>back</Text>
             <Text style={[stylist.userlog, {marginTop: 80}]}>
               Username
             </Text>
-            </ScrollView>
+            <Controller 
+            control={loginForm.control}
+            name="username"
+            render = {({field: {onChange, onBlur, value}}) => (
+              <View style={tw`flex-row items-center bg-black-50 rounded-xl px-4 py-4 border ${loginForm.formState.errors.mail ? 'border-red-500' : 'border-gray-200'}`}
+              >
+              
+              <MaterialCommunityIcons
+              name= "account-outline"
+              size={20}
+              color="black"
+              />
+              <TextInput 
+              style = {tw `flex-1 ml-3 text-gray-800 font-NewsReader`}
+              placeholder='Username'
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              />
+              </View>
+            )} 
+            />
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
