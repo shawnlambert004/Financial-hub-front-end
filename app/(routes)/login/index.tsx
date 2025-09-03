@@ -18,11 +18,12 @@ export default function LoginScreen() {
       password: "",
     },
   });
-  const dashboard = () =>
-  {router.push("/(routes)/SignUp/index")};
+  const dashboard = () => {
+    router.push("/(routes)/SignUp");
+  }
 
   const handleSignUp = () => {
-    router.push("/(routes)/SignUp/index");
+    router.push("/(routes)/SignUp");
   }
   return (
     <SafeAreaView style={stylist.container}>

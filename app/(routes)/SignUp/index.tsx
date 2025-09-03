@@ -1,10 +1,10 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React from 'react'
+import { Text, View } from 'react-native'
 
-export default function SignUpScreen() {
+export default function SignUp() {
   return (
-    <View>
-      <Text>SignUpScreen</Text>
+    <View style={{"marginTop": 100}}>
+      <Text style={{"color": "white"}}>Drizz</Text>
     </View>
-  );
+  )
 }
