@@ -26,7 +26,7 @@ export default function RootLayout() {
         screenOptions={{headerShown: false,
 
         }}>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(routes)/login/dashboard" options={{ headerShown: false }} />
         <Stack.Screen name="(routes)/login/index" />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />

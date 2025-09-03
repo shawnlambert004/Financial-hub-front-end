@@ -1,7 +1,8 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { router } from 'expo-router';
 import React from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 
@@ -17,6 +18,12 @@ export default function LoginScreen() {
       password: "",
     },
   });
+  const dashboard = () =>
+  {router.push("/(routes)/SignUp/index")};
+
+  const handleSignUp = () => {
+    router.push("/(routes)/SignUp/index");
+  }
   return (
     <SafeAreaView style={stylist.container}>
       <Image 
@@ -77,8 +84,15 @@ export default function LoginScreen() {
               secureTextEntry= {true}
               />
               </View>
-            )} 
+            )}
             />
+            <TouchableOpacity style={stylist.button} onPress={dashboard}>
+              <Text style={stylist.buttonText}> Log In</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={stylist.buttonSign} onPress={handleSignUp}>
+              <Text style={stylist.buttonTextSign}> Sign Up</Text>
+            </TouchableOpacity>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
@@ -116,7 +130,45 @@ const stylist = StyleSheet.create({
         textAlign: 'center',
         fontFamily : 'Newsreader',
     },
+    button: {
+        width: '70%',
+        height: 50,
+        backgroundColor : '#8B0000',
+        marginTop: 40,
+        marginLeft: 50,
+        borderRadius: 10,
+        overflow: 'hidden',
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    buttonText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#FFFFFF',
+        textAlign: 'center',
+        opacity : 1,
+        fontFamily : 'Newsreader',
+    },
 
+    buttonSign: {
+        width: '70%',
+        height: 50,
+        backgroundColor : '#8B0000',
+        marginTop: 30,
+        marginLeft: 50,
+        borderRadius: 10,
+        overflow: 'hidden',
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    buttonTextSign: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#FFFFFF',
+        textAlign: 'center',
+        opacity : 1,
+        fontFamily : 'Newsreader',
+    },
 })
 
 //fixed login hi
