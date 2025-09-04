@@ -25,6 +25,13 @@ export default function SignUp() {
     },
   });
 
+
+  const saveData = () => {
+    const formValues = signUpForm.getValues();
+    console.warn(formValues.firstName, formValues.lastName, formValues.username, formValues.password);
+    
+  }
+
   const handleSignUp = () => {
     router.push("/(routes)/login");
   }
