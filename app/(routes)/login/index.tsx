@@ -35,10 +35,7 @@ export default function LoginScreen() {
         style={{flex: 1, paddingBottom: 50, paddingTop: 50, paddingHorizontal: 20, zIndex : 2}}
         >
             <Text style={[stylist.title, {marginTop: 90}]}>Welcome</Text>
-            <Text style={stylist.title}>back</Text>
-            <Text style={[stylist.userlog, {marginTop: 50}]}>
-              Username
-            </Text>
+            <Text style={[stylist.title, {marginBottom: 50}]}>back</Text>
             <Controller 
             control={loginForm.control}
             name="username"
@@ -52,8 +49,9 @@ export default function LoginScreen() {
               color="white"
               />
               <TextInput 
-              style = {tw `flex-1 ml-3 text-gray-800 font-NewsReader`}
+              style = {[tw `flex-1 ml-3`, {color: '#FFFFFF', fontFamily: 'NewsReader'}]}
               placeholder='Username'
+              placeholderTextColor='#9CA3AF'
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
@@ -61,7 +59,7 @@ export default function LoginScreen() {
               </View> )} />
 
               <Text style={[stylist.userlog, {marginTop: 30}]}>
-                Password
+                
               </Text>
 
               <Controller
@@ -77,12 +75,13 @@ export default function LoginScreen() {
                 color = "white"
                 />
                 <TextInput 
-              style = {tw `flex-1 ml-3 text-gray-800 font-NewsReader`}
-              placeholder='Password'
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              secureTextEntry= {true}
+                style = {[tw `flex-1 ml-3`, {color: '#FFFFFF', fontFamily: 'NewsReader'}]}
+                placeholder='Password'
+                placeholderTextColor='#9CA3AF'
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                secureTextEntry= {true}
               />
               </View>
             )}
