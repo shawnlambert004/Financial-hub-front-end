@@ -26,18 +26,23 @@ export default function SignUp() {
   });
 
 
-  const saveData = () => {
+  const saveData = async() => {
     const formValues = signUpForm.getValues();
     console.warn(formValues.firstName, formValues.lastName, formValues.username, formValues.password);
-    const url = "http://localhost:8080/api/beta/user/regUser";
-    let result = fetch(url, {
+    const url = "http://192.168.0.15:8080/api/beta/user/regUser";
+    let response = await fetch(url, {
         method: "POST",
-        headers: {"Content-Type": "application/json"}
-    });
-    body:JSON.stringify({first_name: formValues.firstName, last_name: formValues.lastName, 
+        headers: {"Content-Type": "application/json"},
+        body:JSON.stringify({first_name: formValues.firstName, last_name: formValues.lastName, 
         userName: formValues.username,
-         passWord: formValues.password })
-  }
+        passWord: formValues.password }),
+  });
+    const result = await response.json();
+    if (result) {
+        console.warn("data added");
+    }
+    router.push("/(routes)/login");
+};
 
   const handleSignUp = () => {
     router.push("/(routes)/login");
@@ -158,7 +163,7 @@ export default function SignUp() {
                 
               </Text>
 
-            <TouchableOpacity style={stylist.buttonSign} onPress={handleSignUp}>
+            <TouchableOpacity style={stylist.buttonSign} onPress={saveData}>
               <Text style={stylist.buttonTextSign}> Sign Up</Text>
             </TouchableOpacity>
 
@@ -252,5 +257,3 @@ const stylist = StyleSheet.create({
         fontFamily: 'Newsreader',
     }
 })
-
-//fixed login hi
