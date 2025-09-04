@@ -29,7 +29,14 @@ export default function SignUp() {
   const saveData = () => {
     const formValues = signUpForm.getValues();
     console.warn(formValues.firstName, formValues.lastName, formValues.username, formValues.password);
-    
+    const url = "http://localhost:8080/api/beta/user/regUser";
+    let result = fetch(url, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"}
+    });
+    body:JSON.stringify({first_name: formValues.firstName, last_name: formValues.lastName, 
+        userName: formValues.username,
+         passWord: formValues.password })
   }
 
   const handleSignUp = () => {
