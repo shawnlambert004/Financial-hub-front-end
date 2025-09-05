@@ -26,6 +26,7 @@ export default function RootLayout() {
         screenOptions={{headerShown: false,
 
         }}>
+        <Stack.Screen name="(routes)/Dashboard/index" options={{ headerShown: false }} />  
         <Stack.Screen name="(routes)/SignUp/index" options={{ headerShown: false }} />
         <Stack.Screen name="(routes)/login/index" />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

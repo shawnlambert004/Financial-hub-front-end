@@ -33,7 +33,7 @@ export default function LoginScreen() {
     
     if (response.ok) {
           const result = await response.json();
-          router.push("/(routes)/SignUp");
+          router.push("/(routes)/Dashboard");
           console.warn("pressed button");
     }
     else {
