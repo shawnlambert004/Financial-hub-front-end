@@ -34,8 +34,8 @@ export default function SignUp() {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body:JSON.stringify({first_name: formValues.firstName, last_name: formValues.lastName, 
-        userName: formValues.username,
-        passWord: formValues.password }),
+        username: formValues.username,
+        password: formValues.password }),
   });
     const result = await response.json();
     if (result) {

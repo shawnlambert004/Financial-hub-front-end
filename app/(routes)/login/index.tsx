@@ -18,8 +18,29 @@ export default function LoginScreen() {
       password: "",
     },
   });
-  const dashboard = () => {
-    router.push("/(routes)/SignUp");
+  const handleLogin = async() => {
+    const loginFormValues = loginForm.getValues();
+    console.warn(loginFormValues.username, loginFormValues.password);
+    const url="http://192.168.0.15:8080/api/beta/user/login";
+    let response = await fetch(url, {
+      method : "POST",
+      headers: {"Content-Type" : "application/json"},
+      body: JSON.stringify({username: loginFormValues.username, password: loginFormValues.password})
+    });
+
+    console.warn("Status code:", response.status); // ← ADD THIS
+    console.warn("Status text:", response.statusText); // ← ADD THIS
+    
+    if (response.ok) {
+          const result = await response.json();
+          router.push("/(routes)/SignUp");
+          console.warn("pressed button");
+    }
+    else {
+      const errorText = await response.text();
+      console.warn("not working");
+    }
+
   }
 
   const handleSignUp = () => {
@@ -86,7 +107,7 @@ export default function LoginScreen() {
               </View>
             )}
             />
-            <TouchableOpacity style={stylist.button} onPress={dashboard}>
+            <TouchableOpacity style={stylist.button} onPress={handleLogin}>
               <Text style={stylist.buttonText}> Log In</Text>
             </TouchableOpacity>
 
