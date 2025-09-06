@@ -11,6 +11,7 @@ interface LoginFormData {
   password: string;
 }
 export default function LoginScreen() {
+  const [state, setLoginError] = React.useState(false);
   const loginForm = useForm<LoginFormData>({
     mode: "onChange",
     defaultValues: {
@@ -35,10 +36,12 @@ export default function LoginScreen() {
           const result = await response.json();
           router.push("/(routes)/Dashboard");
           console.warn("pressed button");
+          setLoginError(false);
     }
     else {
       const errorText = await response.text();
       console.warn("not working");
+      setLoginError(true);
     }
 
   }
@@ -61,7 +64,7 @@ export default function LoginScreen() {
             control={loginForm.control}
             name="username"
             render = {({field: {onChange, onBlur, value}}) => (
-              <View style={tw`flex-row items-center bg-black-50 rounded-xl px-3 py-4 border ${loginForm.formState.errors.username ? 'border-red-500' : 'border-gray-200'}`}
+              <View style={tw`flex-row items-center bg-black-50 rounded-xl px-3 py-4 border ${state ? 'border-red-500' : 'border-gray-200'}`}
               >
               
               <MaterialCommunityIcons
@@ -88,7 +91,7 @@ export default function LoginScreen() {
               name="password"
               rules={{required: "password is required",}}
               render={({field: {onChange, onBlur, value}}) => (
-              <View style={tw`flex-row items-center bg-black-50 rounded-xl px-3 py-4 border ${loginForm.formState.errors.password ? 'border-red-500' : 'border-gray-200'}`}
+              <View style={tw`flex-row items-center bg-black-50 rounded-xl px-3 py-4 border ${state ? 'border-red-500' : 'border-gray-200'}`}
               >
                 <MaterialCommunityIcons 
                 name="lock"
