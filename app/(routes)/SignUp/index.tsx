@@ -193,7 +193,7 @@ const stylist = StyleSheet.create({
     zIndex: 1,
   },
   title : {
-        fontSize: 40,
+        fontSize: 10,
         fontWeight: 'bold',
         color: '#FFFFFF',
         marginBottom: 10,
