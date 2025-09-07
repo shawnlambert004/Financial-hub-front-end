@@ -1,13 +1,11 @@
 import React from 'react';
-import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function Dashboard() {
     const [boxState, addButtonPressed] = React.useState(false);
-    const addLink = () => {
-        addButtonPressed(true);
-    }
+
   return (
     <SafeAreaView style={stylist.container}>
       <Image 
@@ -15,10 +13,9 @@ export default function Dashboard() {
               style={stylist.OnboardPage} />
         <View style={{flexDirection:'row', alignItems: 'center'}}>
         <Text style={[stylist.feedtitle, {marginLeft: 140}]}>Your Feed</Text>
-        <TouchableOpacity style={[stylist.buttonSign]} onPress={addLink}>
-            <Text style={[stylist.buttonTextSign]}>Add</Text>
-            
-        </TouchableOpacity>
+        <Pressable style={[stylist.buttonTextSign, stylist.buttonSign]} onPress={() => addButtonPressed(true)} >
+            <Text style= {stylist.buttonTextSign}>Add</Text>
+        </Pressable>
         </View>
         <View style={{position: 'absolute', bottom: 750, height: 1, backgroundColor: "white", width: '100%', marginTop: 2}} />
         <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://google.com')}>Google</Text>
