@@ -1,10 +1,12 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function Dashboard() {
+    const [boxState, addButtonPressed] = React.useState(false);
     const addLink = () => {
+        addButtonPressed(true);
     }
   return (
     <SafeAreaView style={stylist.container}>
@@ -15,12 +17,13 @@ export default function Dashboard() {
         <Text style={[stylist.feedtitle, {marginLeft: 140}]}>Your Feed</Text>
         <TouchableOpacity style={[stylist.buttonSign]} onPress={addLink}>
             <Text style={[stylist.buttonTextSign]}>Add</Text>
+            
         </TouchableOpacity>
         </View>
         <View style={{position: 'absolute', bottom: 750, height: 1, backgroundColor: "white", width: '100%', marginTop: 2}} />
+        <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://google.com')}>Google</Text>
         <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
-        
-        <Text style={[stylist.title, {marginTop: 650}]}>Financial</Text>
+        <Text style={[stylist.title, {marginTop: 620}]}>Financial</Text>
         <Text style={stylist.title}>Hub</Text>
     </SafeAreaView>
   )
@@ -77,4 +80,11 @@ const stylist = StyleSheet.create({
         opacity : 1,
         fontFamily : 'Newsreader',
     },
+    urlSign: {
+        borderRadius: 10,
+        width: '50%',
+        height: 45,
+        color: '#FFFFFF',
+        opacity: 1
+    }
 })
