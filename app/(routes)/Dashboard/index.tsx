@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
@@ -16,6 +16,12 @@ export default function Dashboard() {
         <Pressable style={[stylist.buttonTextSign, stylist.buttonSign]} onPress={() => addButtonPressed(true)} >
             <Text style= {stylist.buttonTextSign}>Add</Text>
         </Pressable>
+        <Modal animationType='slide' transparent={true} visible={boxState} >
+            <View style={[stylist.TextBox, {alignItems: 'center'}]}>
+
+            </View>
+
+        </Modal>
         </View>
         <View style={{position: 'absolute', bottom: 750, height: 1, backgroundColor: "white", width: '100%', marginTop: 2}} />
         <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://google.com')}>Google</Text>
@@ -83,5 +89,13 @@ const stylist = StyleSheet.create({
         height: 45,
         color: '#FFFFFF',
         opacity: 1
-    }
+    },
+    TextBox: {
+        borderRadius : 2,
+        width: '70%',
+        height: 60,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: '#ffffff',
+    },
 })
