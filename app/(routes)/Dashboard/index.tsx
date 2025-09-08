@@ -1,14 +1,25 @@
 import React from 'react';
-import { Image, Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Controller, useForm } from "react-hook-form";
+import { Image, Linking, Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import tw from 'twrnc';
 
+interface urlInput  {
+        url: string;
+    }
 
 export default function Dashboard() {
     const [boxState, addButtonPressed] = React.useState(false);
 
+    const urlForm = useForm<urlInput>({
+        mode: "onChange",
+        defaultValues: {url: "",}
+
+    });
+
   return (
     <SafeAreaView style={stylist.container}>
-      <Image 
+      <Image    
               source={require("@/assets/onboarding/onboarding.jpg")}
               style={stylist.OnboardPage} />
         <View style={{flexDirection:'row', alignItems: 'center'}}>
@@ -17,10 +28,26 @@ export default function Dashboard() {
             <Text style= {stylist.buttonTextSign}>Add</Text>
         </Pressable>
         <Modal animationType='slide' transparent={true} visible={boxState} >
-            <View style={[stylist.TextBox, {alignItems: 'center'}]}>
+            <View style= {stylist.CenterPopUp}>
+            <View style={[stylist.TextBox]}>
+            <Controller
+            control={urlForm.control}
+            name="url"
+            render={({field: {onChange, onBlur, value}}) => 
+            (<View style={tw`flex-row items-center bg-black-50 rounded-xl px-3 py-4 border - black}`}
+              >
+                <TextInput style={[tw `flex-1 ml-3`, {color: '#000000', fontFamily: 'NewsReader'}]}
+                    placeholder='https://'
+                    placeholderTextColor='#9CA3AF'
+                    value = {value}
+                    onBlur={onBlur}
+                    onChangeText={onChange}/>
+                </View>
+                )}
+            />
 
             </View>
-
+            </View>
         </Modal>
         </View>
         <View style={{position: 'absolute', bottom: 750, height: 1, backgroundColor: "white", width: '100%', marginTop: 2}} />
@@ -33,6 +60,13 @@ export default function Dashboard() {
 }
 
 const stylist = StyleSheet.create({
+  CenterPopUp : {
+    flex: 1,
+    alignItems: 'center',
+    alignContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center'
+  },
   container: {flex: 1,
     backgroundColor: "black",
   },
@@ -92,10 +126,12 @@ const stylist = StyleSheet.create({
     },
     TextBox: {
         borderRadius : 2,
-        width: '70%',
-        height: 60,
+        width: '80%',
+        height: 90,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: '#ffffff',
+        backgroundColor: '#000000',
+        borderColor: '#ffff',
+        borderWidth: 1
     },
 })

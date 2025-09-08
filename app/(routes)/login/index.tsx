@@ -29,8 +29,6 @@ export default function LoginScreen() {
       body: JSON.stringify({username: loginFormValues.username, password: loginFormValues.password})
     });
 
-    console.warn("Status code:", response.status); // ← ADD THIS
-    console.warn("Status text:", response.statusText); // ← ADD THIS
     
     if (response.ok) {
           const result = await response.json();
