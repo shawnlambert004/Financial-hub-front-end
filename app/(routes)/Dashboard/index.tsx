@@ -34,9 +34,9 @@ export default function Dashboard() {
             control={urlForm.control}
             name="url"
             render={({field: {onChange, onBlur, value}}) => 
-            (<View style={tw`flex-row items-center bg-black-50 rounded-xl px-3 py-4 border - black}`}
+            (<View style={tw`flex-row items-center bg-black-50 rounded-xl px-3 py-4 border - white}`}
               >
-                <TextInput style={[tw `flex-1 ml-3`, {color: '#000000', fontFamily: 'NewsReader'}]}
+                <TextInput style={[tw `flex-1 ml-3`, {color: '#000000', fontFamily: 'NewsReader', height: 30, borderWidth: 1, borderColor: '#8B0000', borderRadius: 2}]}
                     placeholder='https://'
                     placeholderTextColor='#9CA3AF'
                     value = {value}
@@ -132,6 +132,10 @@ const stylist = StyleSheet.create({
         alignItems: "center",
         backgroundColor: '#000000',
         borderColor: '#ffff',
-        borderWidth: 1
+        borderWidth: 1,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
     },
 })
