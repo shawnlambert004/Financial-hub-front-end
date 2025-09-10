@@ -32,7 +32,7 @@ export default function LoginScreen() {
     
     if (response.ok) {
           const result = await response.json();
-          router.push("/(routes)/Dashboard");
+          router.push({pathname: "/(routes)/Dashboard", params: {username:loginFormValues.username }});
           console.warn("pressed button");
           setLoginError(false);
     }
