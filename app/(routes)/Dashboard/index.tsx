@@ -21,6 +21,33 @@ export default function Dashboard() {
         defaultValues: {url: "",}
     });
 
+    const pullURLs = async() => {
+        const url = "http://192.168.0.15:8080/api/beta/user/getuserID"
+        let response = await fetch(url, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({username: username})
+        });
+
+        if (response.ok) {
+            const userID = await response.text()
+            const url1 = "http://192.168.0.15:8080/api/beta/feed/getUrl"
+            let response2 = await fetch(url1, {
+                method: 'POST',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({user_id: userID})
+            })
+        if (response2.ok) {
+            const urllist = await response2.text()
+            console.log(urllist)
+            return urllist
+        }
+        }
+
+
+
+    }
+
     const submitURL = async() => {
         const url = urlForm.getValues();
         console.warn(url.url);
@@ -40,6 +67,9 @@ export default function Dashboard() {
                 console.warn("error");
             }
         };
+    const getURLs = () => {
+        const Link = ""
+    };
     
 
   return (
@@ -71,7 +101,7 @@ export default function Dashboard() {
                 )}
             />
             <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <Pressable style={stylist.submitButton} onPress={submitURL}>
+            <Pressable style={stylist.submitButton} onPress={pullURLs}>
                 <Text style={stylist.submitTextSign}>Submit</Text>
             </Pressable>
             <Pressable style={stylist.cancelButton} onPress={() => addButtonPressed(false)}>
