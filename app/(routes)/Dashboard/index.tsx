@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { Image, Linking, Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, Linking, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 
@@ -13,6 +13,7 @@ export default function Dashboard() {
     const params = useLocalSearchParams()
     const username = params.username;
     console.log("username from params, ", username);
+    const [urllist, seturllist] = React.useState([]);
 
     const [boxState, addButtonPressed] = React.useState(false);
 
@@ -20,6 +21,10 @@ export default function Dashboard() {
         mode: "onChange",
         defaultValues: {url: "",}
     });
+
+    useEffect(() => {
+        pullURLs();
+    }, []);
 
     const pullURLs = async() => {
         const url = "http://192.168.0.15:8080/api/beta/user/getuserID"
@@ -38,15 +43,15 @@ export default function Dashboard() {
                 body: JSON.stringify({user_id: userID})
             })
         if (response2.ok) {
-            const urllist = await response2.text()
+            const urllist = await response2.json()
             console.log(urllist)
+            seturllist(urllist)
             return urllist
         }
         }
+    };
 
-
-
-    }
+    
 
     const submitURL = async() => {
         const url = urlForm.getValues();
@@ -62,6 +67,7 @@ export default function Dashboard() {
             if (result) {
                 console.warn("nice");
                 addButtonPressed(false);
+                pullURLs();
             }
             else{
                 console.warn("error");
@@ -101,7 +107,7 @@ export default function Dashboard() {
                 )}
             />
             <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <Pressable style={stylist.submitButton} onPress={pullURLs}>
+            <Pressable style={[stylist.submitButton]} onPress={submitURL}>
                 <Text style={stylist.submitTextSign}>Submit</Text>
             </Pressable>
             <Pressable style={stylist.cancelButton} onPress={() => addButtonPressed(false)}>
@@ -114,11 +120,18 @@ export default function Dashboard() {
             </View>
         </Modal>
         </View>
-        <View style={{position: 'absolute', bottom: 750, height: 1, backgroundColor: "white", width: '100%', marginTop: 2}} />
-        <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://google.com')}>Google</Text>
+        <View style={{position: 'absolute', bottom: 750, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
+        <ScrollView>
+        <View>
+            { urllist.map((item, index) => (<View key={index}>
+                <Text style ={stylist.submitTextSign} onPress={() => Linking.openURL(item)}> {item} </Text>
+                <View style={{height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
+                </View>))}
+        </View>
+        </ScrollView>
         <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
-        <Text style={[stylist.title, {marginTop: 620}]}>Financial</Text>
-        <Text style={stylist.title}>Hub</Text>
+        <Text style={[stylist.title, {position: 'absolute', bottom: 60, left: 160}]}>Financial</Text>
+        <Text style={[stylist.title, {position: 'absolute', bottom: 30, left: 190}]}>Hub</Text>
     </SafeAreaView>
   )
 }
