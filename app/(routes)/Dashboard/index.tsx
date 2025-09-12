@@ -1,7 +1,8 @@
+import { LinkPreview } from '@flyerhq/react-native-link-preview';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { Image, Linking, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 
@@ -45,13 +46,11 @@ export default function Dashboard() {
         if (response2.ok) {
             const urllist = await response2.json()
             console.log(urllist)
-            seturllist(urllist)
+            seturllist(urllist);
             return urllist
         }
         }
     };
-
-    
 
     const submitURL = async() => {
         const url = urlForm.getValues();
@@ -73,10 +72,6 @@ export default function Dashboard() {
                 console.warn("error");
             }
         };
-    const getURLs = () => {
-        const Link = ""
-    };
-    
 
   return (
     <SafeAreaView style={stylist.container}>
@@ -124,8 +119,12 @@ export default function Dashboard() {
         <ScrollView>
         <View>
             { urllist.map((item, index) => (<View key={index}>
-                <Text style ={stylist.submitTextSign} onPress={() => Linking.openURL(item)}> {item} </Text>
-                <View style={{height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
+                <View style={{marginBottom: 80, height: 100, width: 200, marginLeft: 30}}>
+                <LinkPreview
+                text = {item} 
+                containerStyle ={{flex: 0.5, padding: 5, borderRadius: 10}}
+                />
+                </View>
                 </View>))}
         </View>
         </ScrollView>
