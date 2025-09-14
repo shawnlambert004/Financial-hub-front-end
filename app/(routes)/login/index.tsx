@@ -77,7 +77,7 @@ export default function LoginScreen() {
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
-              />
+              /> 
               </View> )} />
 
               <Text style={[stylist.userlog, {marginTop: 30}]}>
