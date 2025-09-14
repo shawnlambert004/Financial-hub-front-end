@@ -1,8 +1,8 @@
-import { LinkPreview } from '@flyerhq/react-native-link-preview';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { LinkPreview } from 'react-native-preview-url';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 
@@ -117,14 +117,12 @@ export default function Dashboard() {
         </View>
         <View style={{position: 'absolute', bottom: 750, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
         <ScrollView>
-        <View>
+        <View style={stylist.CenterPopUp}>
             { urllist.map((item, index) => (<View key={index}>
-                <View style={{marginBottom: 80, height: 100, width: 200, marginLeft: 30}}>
-                <LinkPreview
-                text = {item} 
-                containerStyle ={{flex: 0.5, padding: 5, borderRadius: 10}}
-                />
-                </View>
+                <LinkPreview url={item}
+                containerStyle={{margin: 16, borderRadius: 8, backgroundColor: '#0000', borderBlockColor: '#FFFF'}}
+                titleStyle={{color: '#FFFF'}}
+                descriptionStyle={{color: '#FFFF'}}/>
                 </View>))}
         </View>
         </ScrollView>
