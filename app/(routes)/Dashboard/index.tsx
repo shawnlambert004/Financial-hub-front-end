@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import { LinkPreview } from 'react-native-preview-url';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
@@ -118,15 +118,22 @@ export default function Dashboard() {
         <View style={{position: 'absolute', bottom: 750, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
         <ScrollView>
         <View style={stylist.CenterPopUp}>
-            { urllist.map((item, index) => (<View key={index}>
+            { urllist.map((item, index) => (
+                <TouchableWithoutFeedback key={index} onLongPress={()=> console.log(item)}>
+                <View key={index}>
                 <LinkPreview url={item}
                 containerStyle={{margin: 16, borderRadius: 8, backgroundColor: '#0000', borderBlockColor: '#FFFF'}}
                 titleStyle={{color: '#FFFF'}}
-                descriptionStyle={{color: '#FFFF'}}/>
-                </View>))}
+                descriptionStyle={{color: '#FFFF'}}
+                />
+                </View>
+                </TouchableWithoutFeedback>
+                ))
+                }
         </View>
         </ScrollView>
         <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
+        <View style={[stylist.blob]}></View>
         <Text style={[stylist.title, {position: 'absolute', bottom: 60, left: 160}]}>Financial</Text>
         <Text style={[stylist.title, {position: 'absolute', bottom: 30, left: 190}]}>Hub</Text>
     </SafeAreaView>
@@ -244,4 +251,9 @@ const stylist = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    blob: {
+        width: '100%',
+        backgroundColor: '#0000',
+        height: 77,
+    }
 })
