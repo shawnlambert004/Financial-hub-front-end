@@ -16,6 +16,7 @@ export default function Dashboard() {
     console.log("username from params, ", username);
     const [urllist, seturllist] = React.useState([]);
     const [confirmURL, URLdelPop] = React.useState(false);
+    const [selectedURL, URLselected] = React.useState(null);
 
     const [boxState, addButtonPressed] = React.useState(false);
 
@@ -29,13 +30,18 @@ export default function Dashboard() {
     }, []);
 
     const deleteURLs = async() => {
-        const url = "http://localhost:8080/api/beta/feed/delUrl"
-        let response = await fetch(url, {
+        const apiurl = "http://192.168.0.15:8080/api/beta/feed/delUrl"
+        let response = await fetch(apiurl, {
             method: 'DELETE',
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({url: url}) }
+            body: JSON.stringify({url: selectedURL}) }
         )
-    }
+        if (response.ok) {
+            console.log("yes");
+            URLdelPop(false);
+            pullURLs();
+        }
+    };
 
     const pullURLs = async() => {
         const url = "http://192.168.0.15:8080/api/beta/user/getuserID"
@@ -130,7 +136,7 @@ export default function Dashboard() {
             <View style={[stylist.TextBox]}>
             <Text style={[stylist.feedtitle, {marginTop: 30}]}>Delete Link?</Text>
             <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <Pressable style={[stylist.submitButton, {marginTop: 0}]} onPress={() => URLdelPop(false)}>
+            <Pressable style={[stylist.submitButton, {marginTop: 0}]} onPress={deleteURLs}>
                 <Text style={stylist.submitTextSign}>Confirm</Text>
             </Pressable>
             <Pressable style={[stylist.cancelButton, {marginTop: 0}]} onPress={() => URLdelPop(false)}>
@@ -148,7 +154,9 @@ export default function Dashboard() {
         <ScrollView>
         <View style={stylist.CenterPopUp}>
             { urllist.map((item, index) => (
-                <TouchableWithoutFeedback key={index} onLongPress={()=> URLdelPop(true)}>
+                <TouchableWithoutFeedback key={index} onLongPress={()=> {
+                    URLdelPop(true)
+                    URLselected(item)}}>
                 <View key={index}>
                 <LinkPreview url={item}
                 containerStyle={{margin: 16, borderRadius: 8, backgroundColor: '#0000', borderBlockColor: '#FFFF'}}
