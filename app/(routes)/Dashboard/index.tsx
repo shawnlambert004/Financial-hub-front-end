@@ -293,4 +293,4 @@ const stylist = StyleSheet.create({
         backgroundColor: '#0000',
         height: 77,
     }
-})
+}) //Base concept complete
