@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
+
+    useEffect(() => {
+            getArticles();
+        }, []);
+
+    const getArticles = async() => {
+        const url = "http://192.168.0.15:8080/api/beta/articles/getArticles";
+        let response = await fetch(url, {method: 'POST',
+            headers: {"Content-Type": "application/json"}},
+        )
+        if (response.ok) {
+            const data = await response.json()
+            console.log("descriptions" + data.description)
+            return data
+        }
+    }
   return (
     <SafeAreaView style={stylist.container}>
           <Image    
