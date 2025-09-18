@@ -1,7 +1,7 @@
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { LinkPreview } from 'react-native-preview-url';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
@@ -17,7 +17,6 @@ export default function Dashboard() {
     const [urllist, seturllist] = React.useState([]);
     const [confirmURL, URLdelPop] = React.useState(false);
     const [selectedURL, URLselected] = React.useState(null);
-
     const [boxState, addButtonPressed] = React.useState(false);
 
     const urlForm = useForm<urlInput>({
@@ -88,6 +87,9 @@ export default function Dashboard() {
                 console.warn("error");
             }
         };
+    const NewsFeed = () => {
+        router.push("/(routes)/TopNews");
+    }
 
   return (
     <SafeAreaView style={stylist.container}>
@@ -173,6 +175,8 @@ export default function Dashboard() {
         <View style={[stylist.blob]}></View>
         <Text style={[stylist.title, {position: 'absolute', bottom: 60, left: 160}]}>Financial</Text>
         <Text style={[stylist.title, {position: 'absolute', bottom: 30, left: 190}]}>Hub</Text>
+        <TouchableOpacity style={stylist.buttonSign} onPress={NewsFeed}>
+        </TouchableOpacity>
     </SafeAreaView>
   )
 }
