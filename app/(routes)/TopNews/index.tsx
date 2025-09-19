@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function index() {
     const [Des, setDes] = React.useState([])
     const [Title, setTitle] = React.useState([])
+    const [imageUrl, setImage] = React.useState([])
     useEffect(() => {
             getArticles();
         }, []);
@@ -18,6 +19,7 @@ export default function index() {
             const data = await response.json()
             setDes(data.description)
             setTitle(data.title)
+            setImage(data.imageUrl)
             return data
         }
     }
@@ -27,16 +29,20 @@ export default function index() {
                   source={require("@/assets/onboarding/onboarding.jpg")}
                   style={stylist.OnboardPage} />
             <View style={{flexDirection:'row', alignItems: 'center'}}> </View>
-            <Text style={[stylist.feedtitle, {marginTop: 30}]}>Headlines</Text>
+            <Text style={[stylist.feedtitleH, {marginTop: 30}]}>Headlines</Text>
             <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}}/>
             <ScrollView>
                 {Title.map((item1, index1) => (
                 <View key={index1}>
-                    <Text style={[stylist.feedtitle, {marginTop : 20}]}>{item1}</Text>
-                    <View style={[stylist.CenterPopUp, {opacity: 0.5}]}>
-                        <Text key={index1} style={[stylist.feedtitle, {fontSize: 10}, {marginLeft: 100}]}>
+                    <Text style={[stylist.feedtitle, {marginTop:20}]}>{item1}</Text>
+                    <View style={[stylist.CenterPopUp, {opacity: 0.5}, {flexDirection:'row'}]}>
+                        <Image source={{uri: imageUrl[index1]}}
+                                style={{width: 150, height: 100, marginLeft: 20}}
+                                resizeMode="cover"/>
+                        <Text key={index1} style={[stylist.feedtitle, {fontSize: 20}]}>
                             {Des[index1]}
                         </Text>
+                        <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "white", width: '85%', marginBottom: 80, opacity: 0.6}}/>
                     </View>
                 </View>
                 ))}
@@ -71,6 +77,13 @@ const stylist = StyleSheet.create({
   },
     feedtitle : {
         fontSize: 20,
+        color: '#FFFFFF',
+        marginBottom: 10,
+        textAlign: 'center',
+        fontFamily : 'Newsreader',
+    }, 
+    feedtitleH : {
+        fontSize: 30,
         color: '#FFFFFF',
         marginBottom: 10,
         textAlign: 'center',
