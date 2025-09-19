@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
-
+    const [Des, setDes] = React.useState([])
+    const [Title, setTitle] = React.useState([])
     useEffect(() => {
             getArticles();
         }, []);
@@ -15,7 +16,8 @@ export default function index() {
         )
         if (response.ok) {
             const data = await response.json()
-            console.log("descriptions" + data.description)
+            setDes(data.description)
+            setTitle(data.title)
             return data
         }
     }
@@ -25,14 +27,33 @@ export default function index() {
                   source={require("@/assets/onboarding/onboarding.jpg")}
                   style={stylist.OnboardPage} />
             <View style={{flexDirection:'row', alignItems: 'center'}}> </View>
-            <Text style={[stylist.feedtitle, {marginTop: 30}]}>Main Headlines</Text>
+            <Text style={[stylist.feedtitle, {marginTop: 30}]}>Headlines</Text>
             <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}}/>
+            <ScrollView>
+                {Title.map((item1, index1) => (
+                <View key={index1}>
+                    <Text style={[stylist.feedtitle, {marginTop : 20}]}>{item1}</Text>
+                    <View style={[stylist.CenterPopUp, {opacity: 0.5}]}>
+                        <Text key={index1} style={[stylist.feedtitle, {fontSize: 10}, {marginLeft: 100}]}>
+                            {Des[index1]}
+                        </Text>
+                    </View>
+                </View>
+                ))}
+            </ScrollView>
             <View style={{position: 'absolute',bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}}/>
     </SafeAreaView>
     )
 }
 
 const stylist = StyleSheet.create({
+  CenterPopUp : {
+    flex: 1,
+    alignItems: 'center',
+    alignContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center'
+  },
   container: {flex: 1,
     backgroundColor: "black",
   },
@@ -49,7 +70,7 @@ const stylist = StyleSheet.create({
     zIndex: 1,
   },
     feedtitle : {
-        fontSize: 30,
+        fontSize: 20,
         color: '#FFFFFF',
         marginBottom: 10,
         textAlign: 'center',
