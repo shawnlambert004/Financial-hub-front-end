@@ -1,5 +1,7 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { router } from 'expo-router';
 import React, { useEffect } from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
@@ -23,6 +25,9 @@ export default function index() {
             return data
         }
     }
+    const Home = async() => {
+        router.back()
+    }
   return (
     <SafeAreaView style={stylist.container}>
           <Image    
@@ -35,19 +40,41 @@ export default function index() {
                 {Title.map((item1, index1) => (
                 <View key={index1}>
                     <Text style={[stylist.feedtitle, {marginTop:20}]}>{item1}</Text>
-                    <View style={[stylist.CenterPopUp, {opacity: 0.5}, {flexDirection:'row'}]}>
+                    <View style={[stylist.CenterPopUp, {flexDirection:'row'}]}>
                         <Image source={{uri: imageUrl[index1]}}
                                 style={{width: 150, height: 100, marginLeft: 20}}
                                 resizeMode="cover"/>
-                        <Text key={index1} style={[stylist.feedtitle, {fontSize: 20}]}>
+                        <Text key={index1} style={[stylist.feedtitle, {fontSize: 15}, {flex: 1}, {opacity: 0.6}]} numberOfLines={4} ellipsizeMode="tail">
                             {Des[index1]}
                         </Text>
-                        <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "white", width: '85%', marginBottom: 80, opacity: 0.6}}/>
+                        <View style={{position: 'absolute',bottom: 230, height: 1, backgroundColor: "white", width: '90%', marginBottom: 90, opacity: 0.6, marginTop: 10}}/>
                     </View>
                 </View>
                 ))}
             </ScrollView>
             <View style={{position: 'absolute',bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}}/>
+            <View style={[stylist.blob]}>
+        <View style={[{alignItems: 'center'}]}>
+        <Pressable onPress={Home}>
+        <MaterialCommunityIcons
+                      name= "home-variant-outline"
+                      size={60}
+                      color="white"
+                      style={{position: 'absolute', alignSelf: 'center', marginRight: 170}}
+                      />
+        </Pressable>
+        </View>
+        <View style={[{alignItems: 'center'}]}>
+        <Pressable >
+        <MaterialCommunityIcons
+                      name= "newspaper-variant-multiple-outline"
+                      size={60}
+                      color="white"
+                      style={{position: 'absolute', marginRight: 40}}
+                      />
+        </Pressable>
+        </View>
+        </View>
     </SafeAreaView>
     )
 }
@@ -109,5 +136,11 @@ const stylist = StyleSheet.create({
         borderTopRightRadius: 10,
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
+    },
+    blob: {
+        width: '100%',
+        backgroundColor: '#0000',
+        height: 77,
+        alignItems: "center"
     },
 })

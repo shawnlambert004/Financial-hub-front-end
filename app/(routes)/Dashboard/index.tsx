@@ -1,7 +1,8 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import { LinkPreview } from 'react-native-preview-url';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
@@ -172,11 +173,26 @@ export default function Dashboard() {
         </View>
         </ScrollView>
         <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
-        <View style={[stylist.blob]}></View>
-        <Text style={[stylist.title, {position: 'absolute', bottom: 60, left: 160}]}>Financial</Text>
-        <Text style={[stylist.title, {position: 'absolute', bottom: 30, left: 190}]}>Hub</Text>
-        <TouchableOpacity style={stylist.buttonSign} onPress={NewsFeed}>
-        </TouchableOpacity>
+        <View style={[stylist.blob]}>
+        <View style={[{alignItems: 'center'}]}>
+        <MaterialCommunityIcons
+                      name= "home-variant"
+                      size={60}
+                      color="white"
+                      style={{position: 'absolute', alignSelf: 'center', marginRight: 170}}
+                      />
+        </View>
+        <View style={[{alignItems: 'center'}]}>
+        <Pressable onPress={NewsFeed}>
+        <MaterialCommunityIcons
+                      name= "newspaper-variant-multiple-outline"
+                      size={60}
+                      color="white"
+                      style={{position: 'absolute', marginRight: 40}}
+                      />
+        </Pressable>
+        </View>
+        </View>
     </SafeAreaView>
   )
 }
@@ -296,5 +312,6 @@ const stylist = StyleSheet.create({
         width: '100%',
         backgroundColor: '#0000',
         height: 77,
+        alignItems: "center"
     }
 }) //Base concept complete

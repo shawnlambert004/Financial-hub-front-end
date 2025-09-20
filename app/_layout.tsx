@@ -24,7 +24,7 @@ export default function RootLayout() {
       <GestureHandlerRootView>
       <Stack
         screenOptions={{headerShown: false,
-
+          animation: 'none',
         }}>
         <Stack.Screen name="(routes)/TopNews/index" options={{headerShown: false}} />
         <Stack.Screen name="(routes)/Dashboard/index" options={{ headerShown: false }} />  
