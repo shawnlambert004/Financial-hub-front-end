@@ -1,13 +1,14 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from 'expo-router';
 import React, { useEffect } from 'react';
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
     const [Des, setDes] = React.useState([])
     const [Title, setTitle] = React.useState([])
     const [imageUrl, setImage] = React.useState([])
+    const [content, setContent] = React.useState([])
     useEffect(() => {
             getArticles();
         }, []);
@@ -22,6 +23,7 @@ export default function index() {
             setDes(data.description)
             setTitle(data.title)
             setImage(data.imageUrl)
+            setContent(data.contents)
             return data
         }
     }
@@ -33,11 +35,12 @@ export default function index() {
           <Image    
                   source={require("@/assets/onboarding/onboarding.jpg")}
                   style={stylist.OnboardPage} />
-            <View style={{flexDirection:'row', alignItems: 'center'}}> </View>
-            <Text style={[stylist.feedtitleH, {marginTop: 30}]}>Headlines</Text>
+
+            <Text style={[stylist.feedtitleH, {marginTop: 30}]}>Top Stories</Text>
             <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}}/>
             <ScrollView>
                 {Title.map((item1, index1) => (
+                <TouchableOpacity onPress={() => Linking.openURL(content[index1])}>
                 <View key={index1}>
                     <Text style={[stylist.feedtitle, {marginTop:20}]}>{item1}</Text>
                     <View style={[stylist.CenterPopUp, {flexDirection:'row'}]}>
@@ -47,9 +50,10 @@ export default function index() {
                         <Text key={index1} style={[stylist.feedtitle, {fontSize: 15}, {flex: 1}, {opacity: 0.6}]} numberOfLines={4} ellipsizeMode="tail">
                             {Des[index1]}
                         </Text>
-                        <View style={{position: 'absolute',bottom: 230, height: 1, backgroundColor: "white", width: '90%', marginBottom: 90, opacity: 0.6, marginTop: 10}}/>
+                        <View style={{position: 'absolute',backgroundColor: "white", width: '90%', marginBottom: 90, opacity: 0.6, marginTop: 10}}/>
                     </View>
                 </View>
+                </TouchableOpacity>
                 ))}
             </ScrollView>
             <View style={{position: 'absolute',bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}}/>
