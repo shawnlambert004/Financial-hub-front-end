@@ -3,7 +3,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
-import { LinkPreview } from 'react-native-preview-url';
+import RNUrlPreview from 'react-native-preview-url';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 
@@ -100,9 +100,16 @@ export default function Dashboard() {
               source={require("@/assets/onboarding/onboarding.jpg")}
               style={stylist.OnboardPage} />
         <View style={{flexDirection:'row', alignItems: 'center'}}>
-        <Text style={[stylist.feedtitle, {marginLeft: 140}]}>Your Feed</Text>
-        <Pressable style={[stylist.buttonTextSign, stylist.buttonSign]} onPress={() => addButtonPressed(true)} >
-            <Text style= {stylist.buttonTextSign}>Add</Text>
+        <Text style={[stylist.feedtitleH, {marginLeft: 140}]}>Your Feed</Text>
+        <View style={{position: 'absolute',top: 50, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 20, zIndex: 1}}/>
+        <Pressable onPress={() => addButtonPressed(true)}>
+            <View style={[{marginLeft: 60}]}>
+            <MaterialCommunityIcons
+                name="tab-plus"
+                size={50}
+                color="#1e1e1e"
+            />
+            </View>
         </Pressable>
         <Modal animationType='slide' transparent={true} visible={boxState} >
             <View style= {stylist.CenterPopUp}>
@@ -135,7 +142,6 @@ export default function Dashboard() {
             </View>
             </View>
         </Modal>
-        // frienfe
         <Modal animationType='slide' transparent={true} visible={confirmURL} >
             <View style= {stylist.CenterPopUp}>
             <View style={[stylist.TextBox]}>
@@ -155,7 +161,6 @@ export default function Dashboard() {
         </Modal>
         // yessss
         </View>
-        <View style={{position: 'absolute', bottom: 750, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
         <ScrollView>
         <View style={stylist.CenterPopUp}>
             { urllist.map((item, index) => (
@@ -163,10 +168,10 @@ export default function Dashboard() {
                     URLdelPop(true)
                     URLselected(item)}}>
                 <View key={index}>
-                <LinkPreview url={item}
-                containerStyle={{margin: 16, borderRadius: 8, backgroundColor: '#0000', borderBlockColor: '#FFFF'}}
-                titleStyle={{color: '#FFFF'}}
-                descriptionStyle={{color: '#FFFF'}}
+                <RNUrlPreview url={item}
+                containerStyle={{width: '95%', backgroundColor: '#1e1e1e', marginTop: 20 }}
+                titleStyle={{color: '#FFFF', fontFamily: 'inter'}}
+                descriptionStyle={{color: '#FFFF', opacity: 0.7, fontFamily: 'inter'}}
                 />
                 </View>
                 </TouchableWithoutFeedback>
@@ -174,24 +179,30 @@ export default function Dashboard() {
                 }
         </View>
         </ScrollView>
-        <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
-        <View style={[stylist.blob]}>
-        <View style={{flexDirection: 'row', alignItems: "center"}}>
-        <Pressable onPress={NewsFeed}>
-        <MaterialCommunityIcons
-                      name= "newspaper-variant-multiple-outline"
-                      size={60}
-                      color="white"
-                      style={{marginRight: 80}}
-                      />
-        </Pressable>
-        <MaterialCommunityIcons
-                      name= "folder-multiple"
-                      size={60}
-                      color="white"
-                      />
-        </View>
-        </View>
+        <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 10}} />
+            <View style={[stylist.blob]}>
+                <View style={{flexDirection: 'row', alignItems: "center", marginTop: 20}}>
+                <View style={{alignItems: "center"}}>
+                <Pressable onPress={NewsFeed}>
+                <MaterialCommunityIcons
+                    name= "newspaper-variant"
+                    size={50}
+                    color="#1e1e1e"
+                    style={{marginRight: 80}}
+                    />
+                <Text style={[stylist.feedtitle, {marginRight: 80}]}>Feed</Text>
+                </Pressable>
+                </View>
+                <View style={{alignItems: "center"}}>
+                    <MaterialCommunityIcons
+                        name= "folder-multiple"
+                        size={50}
+                        color="#FFFF"
+                        />
+                <Text style={[stylist.feedtitle]}>Saved</Text>
+                </View>
+                </View>
+                </View>
     </SafeAreaView>
   )
 }
@@ -228,16 +239,26 @@ const stylist = StyleSheet.create({
         fontFamily : 'Newsreader',
     },
     feedtitle : {
-        fontSize: 30,
+        fontSize: 15,
         color: '#FFFFFF',
         marginBottom: 10,
         textAlign: 'center',
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
+        fontWeight: 'bold',
+        flexWrap: 'wrap',
+    }, 
+    feedtitleH : {
+        fontSize: 25,
+        color: '#FFFFFF',
+        marginBottom: 10,
+        textAlign: 'center',
+        fontFamily : 'inter',
+        fontWeight: 'bold',
     }, 
     buttonSign: {
         width: '30%',
         height: 45,
-        backgroundColor : '#8B0000',
+        backgroundColor : '#1e1e1e',
         marginTop: 30,
         marginBottom: 40,
         marginLeft: 20,
@@ -252,7 +273,7 @@ const stylist = StyleSheet.create({
         color: '#FFFFFF',
         textAlign: 'center',
         opacity : 1,
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
     },
     urlSign: {
         borderRadius: 10,
@@ -278,7 +299,7 @@ const stylist = StyleSheet.create({
     submitButton: {
         width: '30%',
         height: 45,
-        backgroundColor : '#8B0000',
+        backgroundColor : '#1e1e1e',
         marginTop: 30,
         marginBottom: 40,
         marginLeft: 10,
@@ -298,7 +319,7 @@ const stylist = StyleSheet.create({
         cancelButton: {
         width: '30%',
         height: 45,
-        backgroundColor : '#8B0000',
+        backgroundColor : '#1e1e1e',
         marginTop: 30,
         marginBottom: 40,
         marginLeft: 10,

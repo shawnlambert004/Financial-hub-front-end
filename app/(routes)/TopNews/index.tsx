@@ -2,6 +2,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import RNUrlPreview from 'react-native-preview-url';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
@@ -36,48 +37,63 @@ export default function index() {
         });
     }
   return (
-    <SafeAreaView style={stylist.container}>
+    <SafeAreaView style={[stylist.container]}>
           <Image    
                   source={require("@/assets/onboarding/onboarding.jpg")}
                   style={stylist.OnboardPage} />
-
-            <Text style={[stylist.feedtitleH, {marginTop: 30}]}>Top Stories</Text>
-            <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}}/>
+ 
+            <Text style={[stylist.feedtitleH, {marginTop: 30}, {fontSize: 25}]}>Top Stories</Text>
+            <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 20, zIndex: 1}}/>
             <ScrollView>
-                {Title.map((item1, index1) => (
-                <TouchableOpacity onPress={() => Linking.openURL(content[index1])}>
-                <View key={index1}>
-                    <Text style={[stylist.feedtitle, {marginTop:20}]}>{item1}</Text>
+                
+                <RNUrlPreview 
+                    url={content[0]}
+                    titleStyle={{color: '#FFFF', fontFamily: 'inter'}}
+                    descriptionStyle={{color: '#FFFF', opacity: 0.7, fontFamily: 'inter'}}
+                    containerStyle={{width: '100%', height: '80%'}}
+                />
+                <View style={{alignItems: 'center'}}>
+                <View style={{height: 1, backgroundColor: "#FFFF", width: '90%', opacity: 0.7}}/>
+                </View>
+                {Title.map((item1, index1) => { if (index1==0) return null;
+                return (
+                <TouchableOpacity onPress={() => Linking.openURL(content[index1])} key={index1}>
+                <View style={stylist.articleContainer}>
                     <View style={[stylist.CenterPopUp, {flexDirection:'row'}]}>
                         <Image source={{uri: imageUrl[index1]}}
-                                style={{width: 150, height: 100, marginLeft: 20}}
+                                style={{width: 150, height: 80, borderRadius: 7}}
                                 resizeMode="cover"/>
-                        <Text key={index1} style={[stylist.feedtitle, {fontSize: 15}, {flex: 1}, {opacity: 0.6}]} numberOfLines={4} ellipsizeMode="tail">
-                            {Des[index1]}
-                        </Text>
-                        <View style={{position: 'absolute',backgroundColor: "white", width: '90%', marginBottom: 90, opacity: 0.6, marginTop: 10}}/>
+                        <View style={{flex: 1}} >
+                         <Text style={[stylist.feedtitle, {marginTop:20}, {flexWrap: 'wrap'}]} numberOfLines={4} ellipsizeMode="tail">{item1}</Text>
+                        </View>
                     </View>
+                    <Text key={index1} style={[stylist.feedtitle, {fontSize: 15 }, {flex: 1}, {opacity: 0.6}, {marginBottom: 1}, {fontWeight:'light' }]} numberOfLines={4} ellipsizeMode="tail">
+                            {Des[index1]}
+                    </Text>
                 </View>
                 </TouchableOpacity>
-                ))}
+                );
+                })}
             </ScrollView>
-            <View style={{position: 'absolute',bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}}/>
+            <View style={{position: 'absolute',bottom: 100, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 10}}/>
             <View style={[stylist.blob]}>
-        <View style={{flexDirection: 'row', alignItems: "center"}}>
+        <View style={{flexDirection: 'row', alignItems: "center", marginTop: 20}}>
+        <View style={{alignItems: "center"}}>
         <MaterialCommunityIcons
-                      name= "newspaper-variant-multiple-outline"
-                      size={60}
-                      color="white"
-                      style={{marginRight: 80}}
-                      />
+            name= "newspaper-variant"
+            size={50}
+            color="white"
+            style={{marginRight: 80}}
+            />
+        <Text style={[stylist.feedtitle, {marginRight: 80}]}>Feed</Text>
+        </View>
         <Pressable onPress={Home}>
         <MaterialCommunityIcons
                       name= "folder-multiple-outline"
-                      size={60}
-                      color="white"
+                      size={50}
+                      color="#1e1e1e"
                       />
-        </Pressable>
-        <Pressable >
+        <Text style={[stylist.feedtitle]}>Saved</Text>
         </Pressable>
         </View>
         </View>
@@ -88,10 +104,7 @@ export default function index() {
 const stylist = StyleSheet.create({
   CenterPopUp : {
     flex: 1,
-    alignItems: 'center',
-    alignContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center'
+    backgroundColor: '#1e1e1e'
   },
   container: {flex: 1,
     backgroundColor: "black",
@@ -109,18 +122,21 @@ const stylist = StyleSheet.create({
     zIndex: 1,
   },
     feedtitle : {
-        fontSize: 20,
+        fontSize: 15,
         color: '#FFFFFF',
         marginBottom: 10,
         textAlign: 'center',
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
+        fontWeight: 'bold',
+        flexWrap: 'wrap',
     }, 
     feedtitleH : {
-        fontSize: 30,
+        fontSize: 15,
         color: '#FFFFFF',
         marginBottom: 10,
         textAlign: 'center',
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
+        fontWeight: 'bold',
     }, 
     urlSign: {
         borderRadius: 10,
@@ -149,4 +165,12 @@ const stylist = StyleSheet.create({
         height: 77,
         alignItems: "center"
     },
+    articleContainer: {
+        margin: 8,
+        padding: 15, 
+        borderRadius: 16,
+        borderWidth: 1,
+        borderColor: '#0000',
+        backgroundColor: '#1e1e1e'
+    }
 })
