@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         marginBottom: 10,
         textAlign: 'center',
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
     },
     subtitle : {
         fontSize: 16,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center',
         opacity : 0.7,
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
     },
     button: {
         width: '70%',
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         textAlign: 'center',
         opacity : 1,
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
     },
 
 });

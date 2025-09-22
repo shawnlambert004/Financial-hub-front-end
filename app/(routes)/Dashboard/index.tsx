@@ -100,7 +100,7 @@ export default function Dashboard() {
               source={require("@/assets/onboarding/onboarding.jpg")}
               style={stylist.OnboardPage} />
         <View style={{flexDirection:'row', alignItems: 'center'}}>
-        <Text style={[stylist.feedtitleH, {marginLeft: 140}]}>Your Feed</Text>
+        <Text style={[stylist.feedtitleH, {marginLeft: 140, marginTop: 10}]}>Your Feed</Text>
         <View style={{position: 'absolute',top: 50, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 20, zIndex: 1}}/>
         <Pressable onPress={() => addButtonPressed(true)}>
             <View style={[{marginLeft: 60}]}>
@@ -159,11 +159,10 @@ export default function Dashboard() {
             </View>
             </View>
         </Modal>
-        // yessss
         </View>
         <ScrollView>
         <View style={stylist.CenterPopUp}>
-            { urllist.map((item, index) => (
+            { urllist.map((item, index) => {if (item == "") return null; return (
                 <TouchableWithoutFeedback key={index} onLongPress={()=> {
                     URLdelPop(true)
                     URLselected(item)}}>
@@ -175,7 +174,7 @@ export default function Dashboard() {
                 />
                 </View>
                 </TouchableWithoutFeedback>
-                ))
+                )})
                 }
         </View>
         </ScrollView>
@@ -334,4 +333,4 @@ const stylist = StyleSheet.create({
         height: 77,
         alignItems: "center"
     }
-}) //Base concept complete
+}) 

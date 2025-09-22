@@ -71,7 +71,7 @@ export default function LoginScreen() {
               color="white"
               />
               <TextInput 
-              style = {[tw `flex-1 ml-3`, {color: '#FFFFFF', fontFamily: 'NewsReader'}]}
+              style = {[tw `flex-1 ml-3`, {color: '#FFFFFF', fontFamily: 'inter'}]}
               placeholder='Username'
               placeholderTextColor='#9CA3AF'
               value={value}
@@ -97,7 +97,7 @@ export default function LoginScreen() {
                 color = "white"
                 />
                 <TextInput 
-                style = {[tw `flex-1 ml-3`, {color: '#FFFFFF', fontFamily: 'NewsReader'}]}
+                style = {[tw `flex-1 ml-3`, {color: '#FFFFFF', fontFamily: 'inter'}]}
                 placeholder='Password'
                 placeholderTextColor='#9CA3AF'
                 value={value}
@@ -142,7 +142,7 @@ const stylist = StyleSheet.create({
         color: '#FFFFFF',
         marginBottom: 10,
         textAlign: 'center',
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
     },
     userlog : {
         fontSize: 27,
@@ -150,12 +150,13 @@ const stylist = StyleSheet.create({
         color: '#666666',
         marginBottom: 10,
         textAlign: 'center',
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
     },
     button: {
         width: '70%',
         height: 50,
-        backgroundColor : '#8B0000',
+        backgroundColor : '#1e1e1e',
+        opacity: 0.7,
         marginTop: 40,
         marginLeft: 50,
         borderRadius: 10,
@@ -169,13 +170,13 @@ const stylist = StyleSheet.create({
         color: '#FFFFFF',
         textAlign: 'center',
         opacity : 1,
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
     },
 
     buttonSign: {
         width: '70%',
         height: 50,
-        backgroundColor : '#8B0000',
+        backgroundColor : '#1e1e1e',
         marginTop: 30,
         marginLeft: 50,
         borderRadius: 10,
@@ -189,7 +190,7 @@ const stylist = StyleSheet.create({
         color: '#FFFFFF',
         textAlign: 'center',
         opacity : 1,
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
     },
 })
 
