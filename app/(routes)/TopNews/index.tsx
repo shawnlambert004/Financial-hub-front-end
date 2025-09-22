@@ -1,10 +1,13 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
+    const params = useLocalSearchParams()
+    const username = params.username;
+    console.log("username from params, ", username);
     const [Des, setDes] = React.useState([])
     const [Title, setTitle] = React.useState([])
     const [imageUrl, setImage] = React.useState([])
@@ -27,8 +30,10 @@ export default function index() {
             return data
         }
     }
-    const Home = async() => {
-        router.back()
+    const Home = ()=> {
+        router.replace({pathname: "/(routes)/Dashboard",
+            params: {username: username}
+        });
     }
   return (
     <SafeAreaView style={stylist.container}>

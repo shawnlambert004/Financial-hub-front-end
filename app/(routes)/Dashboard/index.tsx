@@ -89,7 +89,9 @@ export default function Dashboard() {
             }
         };
     const NewsFeed = () => {
-        router.push("/(routes)/TopNews");
+        router.replace({pathname: "/(routes)/TopNews", 
+            params: {username: username}
+        });
     }
 
   return (

@@ -32,7 +32,7 @@ export default function LoginScreen() {
     
     if (response.ok) {
           const result = await response.json();
-          router.push({pathname: "/(routes)/Dashboard", params: {username:loginFormValues.username }});
+          router.push({pathname: "/(routes)/TopNews", params: {username:loginFormValues.username }});
           console.warn("pressed button");
           setLoginError(false);
     }
@@ -45,7 +45,7 @@ export default function LoginScreen() {
   }
 
   const handleSignUp = () => {
-    router.push("/(routes)/SignUp");
+    router.replace("/(routes)/SignUp");
   }
   return (
     <SafeAreaView style={stylist.container}>
