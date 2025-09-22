@@ -58,24 +58,21 @@ export default function index() {
             </ScrollView>
             <View style={{position: 'absolute',bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}}/>
             <View style={[stylist.blob]}>
-        <View style={[{alignItems: 'center'}]}>
-        <Pressable onPress={Home}>
-        <MaterialCommunityIcons
-                      name= "home-variant-outline"
-                      size={60}
-                      color="white"
-                      style={{position: 'absolute', alignSelf: 'center', marginRight: 170}}
-                      />
-        </Pressable>
-        </View>
-        <View style={[{alignItems: 'center'}]}>
-        <Pressable >
+        <View style={{flexDirection: 'row', alignItems: "center"}}>
         <MaterialCommunityIcons
                       name= "newspaper-variant-multiple-outline"
                       size={60}
                       color="white"
-                      style={{position: 'absolute', marginRight: 40}}
+                      style={{marginRight: 80}}
                       />
+        <Pressable onPress={Home}>
+        <MaterialCommunityIcons
+                      name= "folder-multiple-outline"
+                      size={60}
+                      color="white"
+                      />
+        </Pressable>
+        <Pressable >
         </Pressable>
         </View>
         </View>

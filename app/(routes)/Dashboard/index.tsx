@@ -174,23 +174,20 @@ export default function Dashboard() {
         </ScrollView>
         <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "white", width: '100%', marginBottom: 10}} />
         <View style={[stylist.blob]}>
-        <View style={[{alignItems: 'center'}]}>
-        <MaterialCommunityIcons
-                      name= "home-variant"
-                      size={60}
-                      color="white"
-                      style={{position: 'absolute', alignSelf: 'center', marginRight: 170}}
-                      />
-        </View>
-        <View style={[{alignItems: 'center'}]}>
+        <View style={{flexDirection: 'row', alignItems: "center"}}>
         <Pressable onPress={NewsFeed}>
         <MaterialCommunityIcons
                       name= "newspaper-variant-multiple-outline"
                       size={60}
                       color="white"
-                      style={{position: 'absolute', marginRight: 40}}
+                      style={{marginRight: 80}}
                       />
         </Pressable>
+        <MaterialCommunityIcons
+                      name= "folder-multiple"
+                      size={60}
+                      color="white"
+                      />
         </View>
         </View>
     </SafeAreaView>
