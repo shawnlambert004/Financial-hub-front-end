@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     button: {
         width: '70%',
         height: 50,
-        backgroundColor : '#8B0000',
+        backgroundColor : '#1e1e1e',
         marginTop: 200,
         borderRadius: 10,
         overflow: 'hidden',

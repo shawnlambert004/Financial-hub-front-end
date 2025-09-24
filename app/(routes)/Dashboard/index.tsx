@@ -184,8 +184,8 @@ export default function Dashboard() {
                 <View style={{alignItems: "center"}}>
                 <Pressable onPress={NewsFeed}>
                 <MaterialCommunityIcons
-                    name= "newspaper-variant"
-                    size={50}
+                    name= "newspaper-variant-multiple"
+                    size={40}
                     color="#1e1e1e"
                     style={{marginRight: 80}}
                     />
@@ -195,7 +195,7 @@ export default function Dashboard() {
                 <View style={{alignItems: "center"}}>
                     <MaterialCommunityIcons
                         name= "folder-multiple"
-                        size={50}
+                        size={40}
                         color="#FFFF"
                         />
                 <Text style={[stylist.feedtitle]}>Saved</Text>
@@ -313,7 +313,7 @@ const stylist = StyleSheet.create({
         color: '#FFFFFF',
         textAlign: 'center',
         opacity : 1,
-        fontFamily : 'Newsreader',
+        fontFamily : 'inter',
     },
         cancelButton: {
         width: '30%',

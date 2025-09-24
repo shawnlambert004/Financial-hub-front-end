@@ -44,7 +44,7 @@ export default function index() {
  
             <Text style={[stylist.feedtitleH, {marginTop: 30}, {fontSize: 25}]}>Top Stories</Text>
             <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 20, zIndex: 1}}/>
-            <ScrollView>
+            <ScrollView >
                 
                 <RNUrlPreview 
                     url={content[0]}
@@ -64,13 +64,16 @@ export default function index() {
                                 style={{width: 150, height: 80, borderRadius: 7}}
                                 resizeMode="cover"/>
                         <View style={{flex: 1}} >
-                         <Text style={[stylist.feedtitle, {marginTop:20}, {flexWrap: 'wrap'}]} numberOfLines={4} ellipsizeMode="tail">{item1}</Text>
+                         <Text style={[stylist.feedtitle, {flexWrap: 'wrap'}]} numberOfLines={4} ellipsizeMode="tail">{item1}</Text>
+                         <Text key={index1} style={[stylist.feedtitle, {fontSize: 15 }, {flex: 1}, {opacity: 0.6},  {fontWeight:'light' }]} numberOfLines={2} ellipsizeMode="tail">
+                            {Des[index1]}
+                        </Text>
                         </View>
                     </View>
-                    <Text key={index1} style={[stylist.feedtitle, {fontSize: 15 }, {flex: 1}, {opacity: 0.6}, {marginBottom: 1}, {fontWeight:'light' }]} numberOfLines={4} ellipsizeMode="tail">
-                            {Des[index1]}
-                    </Text>
                 </View>
+                    <View style={{alignItems: 'center'}}>
+                    <View style={{height: 1, backgroundColor: "#FFFF", width: '80%', opacity: 0.1}}/>
+                    </View>
                 </TouchableOpacity>
                 );
                 })}
@@ -80,8 +83,8 @@ export default function index() {
         <View style={{flexDirection: 'row', alignItems: "center", marginTop: 20}}>
         <View style={{alignItems: "center"}}>
         <MaterialCommunityIcons
-            name= "newspaper-variant"
-            size={50}
+            name= "newspaper-variant-multiple"
+            size={40}
             color="white"
             style={{marginRight: 80}}
             />
@@ -90,7 +93,7 @@ export default function index() {
         <Pressable onPress={Home}>
         <MaterialCommunityIcons
                       name= "folder-multiple-outline"
-                      size={50}
+                      size={40}
                       color="#1e1e1e"
                       />
         <Text style={[stylist.feedtitle]}>Saved</Text>
@@ -104,7 +107,7 @@ export default function index() {
 const stylist = StyleSheet.create({
   CenterPopUp : {
     flex: 1,
-    backgroundColor: '#1e1e1e'
+    backgroundColor: '#0000'
   },
   container: {flex: 1,
     backgroundColor: "black",
@@ -171,6 +174,6 @@ const stylist = StyleSheet.create({
         borderRadius: 16,
         borderWidth: 1,
         borderColor: '#0000',
-        backgroundColor: '#1e1e1e'
+        backgroundColor: '#0000'
     }
 })
