@@ -35,13 +35,13 @@ export default function index() {
             params: {username: username}
         });
     }
-    const Article = () => {
+    const Article = (articleIndex: number) => {
         router.push({pathname: "/(routes)/Article" as any,
             params: {
-                imageUrl: JSON.stringify(imageUrl), 
-                Content: JSON.stringify(Content), 
-                Title: JSON.stringify(Title), 
-                idx: idx}
+                imageUrl: imageUrl[articleIndex], 
+                Content: Content[articleIndex], 
+                Title: Title[articleIndex], 
+                idx: articleIndex}
         });
     }
   return (
@@ -65,7 +65,7 @@ export default function index() {
                 </View>
                 {Title.map((item1, index1) => { if (index1==0) return null;
                 return (
-                <TouchableOpacity onPress={() => {setIdx(index1); Article();}} key={index1}>
+                <TouchableOpacity onPress={() => {setIdx(index1); Article(index1);}} key={index1}>
                 <View style={stylist.articleContainer}>
                     <View style={[stylist.CenterPopUp, {flexDirection:'row'}]}>
                         <Image source={{uri: imageUrl[index1]}}
