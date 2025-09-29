@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
-import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import RNUrlPreview from 'react-native-preview-url';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,10 +9,10 @@ export default function index() {
     const params = useLocalSearchParams()
     const username = params.username;
     console.log("username from params, ", username);
-    const [Des, setDes] = React.useState([])
     const [Title, setTitle] = React.useState([])
     const [imageUrl, setImage] = React.useState([])
-    const [content, setContent] = React.useState([])
+    const [Content, setContent] = React.useState([])
+    const [idx, setIdx] = React.useState(0)
     useEffect(() => {
             getArticles();
         }, []);
@@ -24,7 +24,6 @@ export default function index() {
         )
         if (response.ok) {
             const data = await response.json()
-            setDes(data.description)
             setTitle(data.title)
             setImage(data.imageUrl)
             setContent(data.contents)
@@ -34,6 +33,15 @@ export default function index() {
     const Home = ()=> {
         router.replace({pathname: "/(routes)/Dashboard",
             params: {username: username}
+        });
+    }
+    const Article = () => {
+        router.push({pathname: "/(routes)/Article" as any,
+            params: {
+                imageUrl: JSON.stringify(imageUrl), 
+                Content: JSON.stringify(Content), 
+                Title: JSON.stringify(Title), 
+                idx: idx}
         });
     }
   return (
@@ -47,7 +55,7 @@ export default function index() {
             <ScrollView >
                 
                 <RNUrlPreview 
-                    url={content[0]}
+                    url={"https://www.google.com/"}
                     titleStyle={{color: '#FFFF', fontFamily: 'inter'}}
                     descriptionStyle={{color: '#FFFF', opacity: 0.7, fontFamily: 'inter'}}
                     containerStyle={{width: '100%', height: '80%'}}
@@ -57,7 +65,7 @@ export default function index() {
                 </View>
                 {Title.map((item1, index1) => { if (index1==0) return null;
                 return (
-                <TouchableOpacity onPress={() => Linking.openURL(content[index1])} key={index1}>
+                <TouchableOpacity onPress={() => {setIdx(index1); Article();}} key={index1}>
                 <View style={stylist.articleContainer}>
                     <View style={[stylist.CenterPopUp, {flexDirection:'row'}]}>
                         <Image source={{uri: imageUrl[index1]}}
@@ -65,9 +73,6 @@ export default function index() {
                                 resizeMode="cover"/>
                         <View style={{flex: 1}} >
                          <Text style={[stylist.feedtitle, {flexWrap: 'wrap'}]} numberOfLines={4} ellipsizeMode="tail">{item1}</Text>
-                         <Text key={index1} style={[stylist.feedtitle, {fontSize: 15 }, {flex: 1}, {opacity: 0.6},  {fontWeight:'light' }]} numberOfLines={2} ellipsizeMode="tail">
-                            {Des[index1]}
-                        </Text>
                         </View>
                     </View>
                 </View>
