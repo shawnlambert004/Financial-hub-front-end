@@ -13,6 +13,7 @@ export default function index() {
     const [imageUrl, setImage] = React.useState([])
     const [Content, setContent] = React.useState([])
     const [idx, setIdx] = React.useState(0)
+    const [sources, setSources] = React.useState([])
     useEffect(() => {
             getArticles();
         }, []);
@@ -27,6 +28,7 @@ export default function index() {
             setTitle(data.title)
             setImage(data.imageUrl)
             setContent(data.contents)
+            setSources(data.sources)
             return data
         }
     }
@@ -73,6 +75,7 @@ export default function index() {
                                 resizeMode="cover"/>
                         <View style={{flex: 1}} >
                          <Text style={[stylist.feedtitle, {flexWrap: 'wrap'}]} numberOfLines={4} ellipsizeMode="tail">{item1}</Text>
+                         <Text style={[stylist.feedtitle, {opacity: 0.7}]}>{sources[index1]}</Text>
                         </View>
                     </View>
                 </View>
