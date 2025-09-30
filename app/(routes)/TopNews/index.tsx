@@ -14,6 +14,7 @@ export default function index() {
     const [Content, setContent] = React.useState([])
     const [idx, setIdx] = React.useState(0)
     const [sources, setSources] = React.useState([])
+    const [byLine, setByLine] = React.useState([])
     useEffect(() => {
             getArticles();
         }, []);
@@ -29,6 +30,7 @@ export default function index() {
             setImage(data.imageUrl)
             setContent(data.contents)
             setSources(data.sources)
+            setByLine(data.byLine)
             return data
         }
     }
@@ -37,13 +39,21 @@ export default function index() {
             params: {username: username}
         });
     }
+
+    const Bookmarked = () => {
+    router.replace({pathname: "/(routes)/Bookmarked",
+        params: {username: username}
+    });
+    }
+
     const Article = (articleIndex: number) => {
         router.push({pathname: "/(routes)/Article" as any,
             params: {
                 imageUrl: imageUrl[articleIndex], 
                 Content: Content[articleIndex], 
                 Title: Title[articleIndex], 
-                idx: articleIndex}
+                idx: articleIndex,
+                byLine: byLine[articleIndex]}
         });
     }
   return (
@@ -88,23 +98,32 @@ export default function index() {
             </ScrollView>
             <View style={{position: 'absolute',bottom: 100, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 10}}/>
             <View style={[stylist.blob]}>
-        <View style={{flexDirection: 'row', alignItems: "center", marginTop: 20}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-around',alignItems: "center", marginTop: 20}}>
         <View style={{alignItems: "center"}}>
         <MaterialCommunityIcons
             name= "newspaper-variant-multiple"
             size={40}
             color="white"
-            style={{marginRight: 80}}
+            style={{alignItems: "center"}}
             />
-        <Text style={[stylist.feedtitle, {marginRight: 80}]}>Feed</Text>
+        <Text style={[stylist.feedtitle]}>Feed</Text>
         </View>
-        <Pressable onPress={Home}>
+        <Pressable onPress={Bookmarked} style={{flex: 0.7, alignItems: "center"}}>
         <MaterialCommunityIcons
-                      name= "folder-multiple-outline"
+            name= "bookmark"
+            size={40}
+            color="#1e1e1e"
+            style={{alignItems: "center"}}
+            />
+        <Text style={[stylist.feedtitle]}>Saved</Text>
+        </Pressable>
+        <Pressable onPress={Home} style={{alignItems: "center"}}>
+        <MaterialCommunityIcons
+                      name= "link-variant"
                       size={40}
                       color="#1e1e1e"
                       />
-        <Text style={[stylist.feedtitle]}>Saved</Text>
+        <Text style={[stylist.feedtitle]}>Links</Text>
         </Pressable>
         </View>
         </View>

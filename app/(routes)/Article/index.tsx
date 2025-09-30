@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
@@ -10,13 +10,13 @@ export default function index() {
   const Title = Params.Title
   const index = Params.idx
   const imageURL = Params.imageUrl
+  const byLine = Params.byLine
 
   const back = () => {
     router.back();
   }
   return (
     <SafeAreaView style={styles.Container}>
-    <View>
       <TouchableOpacity onPress={back}>
       <MaterialCommunityIcons
           name= "arrow-left"
@@ -27,13 +27,12 @@ export default function index() {
       </TouchableOpacity>
       <ScrollView>
       <Image source={{uri: String(imageURL)}}
-        style={{flex: 1, width: '100%', height: 300, resizeMode:"cover"}}
-        resizeMode="cover"
+        style={{flex: 1, width: '100%', height: 300, resizeMode:"cover", marginBottom: 10}}
         progressiveRenderingEnabled={true}/>
-      <Text style={[styles.feedtitleH, {fontSize: 20, marginTop: 40}]} numberOfLines={3} ellipsizeMode="tail">{Title}</Text> 
+      <Text style={[styles.feedtitleH, {fontSize: 20, marginTop: 4, marginBottom: 10}]} numberOfLines={3} ellipsizeMode="tail">{Title}</Text> 
+      <Text style={[styles.feedtitleH, {fontSize: 15, fontWeight: "light", marginBottom: 20}]}>{byLine}</Text>
       <Text style={[styles.feedtext]}>{Article}</Text>
       </ScrollView>
-    </View>
     </SafeAreaView>
   )
 }

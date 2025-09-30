@@ -180,28 +180,35 @@ export default function Dashboard() {
         </ScrollView>
         <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 10}} />
             <View style={[stylist.blob]}>
-                <View style={{flexDirection: 'row', alignItems: "center", marginTop: 20}}>
-                <View style={{alignItems: "center"}}>
-                <Pressable onPress={NewsFeed}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: "center", marginTop: 20}}>
+            <Pressable onPress={NewsFeed}>
                 <MaterialCommunityIcons
                     name= "newspaper-variant-multiple"
                     size={40}
                     color="#1e1e1e"
-                    style={{marginRight: 80}}
+                    style={{alignItems: "center"}}
                     />
-                <Text style={[stylist.feedtitle, {marginRight: 80}]}>Feed</Text>
-                </Pressable>
-                </View>
-                <View style={{alignItems: "center"}}>
-                    <MaterialCommunityIcons
-                        name= "folder-multiple"
-                        size={40}
-                        color="#FFFF"
-                        />
-                <Text style={[stylist.feedtitle]}>Saved</Text>
-                </View>
-                </View>
-                </View>
+                <Text style={[stylist.feedtitle]}>Feed</Text>
+            </Pressable>
+            <Pressable onPress={NewsFeed} style={{alignItems: "center", flex: 0.7}}>
+                <MaterialCommunityIcons
+                    name= "bookmark"
+                    size={40}
+                    color="#1e1e1e"
+                    style={{alignItems: "center"}}
+                    />
+            <Text style={[stylist.feedtitle]}>Saved</Text>
+            </Pressable>
+            <View style={{alignItems: "center"}}>
+                <MaterialCommunityIcons
+                    name= "link-variant"
+                    size={40}
+                    color="#FFFF"
+                />
+            <Text style={[stylist.feedtitle]}>Links</Text>
+            </View>
+            </View>
+            </View>
     </SafeAreaView>
   )
 }
