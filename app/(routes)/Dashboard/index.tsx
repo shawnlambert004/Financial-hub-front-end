@@ -100,8 +100,8 @@ export default function Dashboard() {
               source={require("@/assets/onboarding/onboarding.jpg")}
               style={stylist.OnboardPage} />
         <View style={{flexDirection:'row', alignItems: 'center'}}>
-        <Text style={[stylist.feedtitleH, {marginLeft: 140, marginTop: 10}]}>Your Feed</Text>
-        <View style={{position: 'absolute',top: 50, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 20, zIndex: 1}}/>
+        <Text style={[stylist.feedtitleH, {marginTop: 30}, {fontSize: 25},{marginLeft: 120}]}>Your Feed</Text>
+        <View style={{position: 'absolute',top: 80, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 10, zIndex: 1}}/>
         <Pressable onPress={() => addButtonPressed(true)}>
             <View style={[{marginLeft: 60}]}>
             <MaterialCommunityIcons

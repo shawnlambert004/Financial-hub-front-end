@@ -53,7 +53,9 @@ export default function index() {
                 Content: Content[articleIndex], 
                 Title: Title[articleIndex], 
                 idx: articleIndex,
-                byLine: byLine[articleIndex]}
+                byLine: byLine[articleIndex],
+                username: username,
+                sources: sources[articleIndex]}
         });
     }
   return (

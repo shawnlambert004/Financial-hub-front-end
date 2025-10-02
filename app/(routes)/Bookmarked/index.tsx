@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from 'expo-router';
-import React from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
@@ -14,6 +14,7 @@ export default function index() {
     const [idx, setIdx] = React.useState(0)
     const [sources, setSources] = React.useState([])
     const [byLine, setByLine] = React.useState([])
+    const [articles, setarticles] = React.useState([])
 
     const NewsFeed = () => {
             router.replace({pathname: "/(routes)/TopNews", 
@@ -26,6 +27,47 @@ export default function index() {
             params: {username: username}
         });
     }
+
+    
+     useEffect(() => {
+        getSavedArticles();
+    }, []);
+
+    const getSavedArticles = async() => {
+        console.log("yes")
+        const url = `http://192.168.0.15:8080/api/beta/Savearticles/getArty?username=${username}`;
+        const response = await fetch(url, {method: 'POST',
+            headers: {"Content-type": "application/json"},
+        });
+        if (response.ok) {
+            console.log("nice")
+            const articles = await response.json()
+            setarticles(articles)
+            setTitle(articles.map((article: any) => article.title))
+            setImage(articles.map((article: any) => article.imageURL))
+            setContent(articles.map((article: any) => article.contents))
+            setSources(articles.map((article: any) => article.sources))
+            setByLine(articles.map((article: any) => article.byLine))
+            console.log(Title)
+           
+        }
+        else{
+            console.log("oh no")
+        }
+    };
+
+    const Article = (articleIndex: number) => {
+        router.push({pathname: "/(routes)/Article" as any,
+            params: {
+                imageUrl: imageUrl[articleIndex], 
+                Content: Content[articleIndex], 
+                Title: Title[articleIndex], 
+                idx: articleIndex,
+                byLine: byLine[articleIndex],
+                username: username,
+                sources: sources}
+        });
+        }
    
   return (
     <SafeAreaView style={[stylist.container]}>
@@ -35,7 +77,28 @@ export default function index() {
 
         <Text style={[stylist.feedtitleH, {marginTop: 30}, {fontSize: 25}]}>Saved Articles</Text>
         <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 20, zIndex: 1}}/>
-        
+        <ScrollView >
+        {Title.map((item1, index1) => { if (index1==0) return null;
+            return (
+            <TouchableOpacity onPress={() => {setIdx(index1); Article(index1);}} key={index1}>
+            <View style={stylist.articleContainer}>
+                <View style={[stylist.CenterPopUp, {flexDirection:'row'}]}>
+                    <Image source={{uri: imageUrl[index1]}}
+                            style={{width: 150, height: 80, borderRadius: 7}}
+                            resizeMode="cover"/>
+                    <View style={{flex: 1}} >
+                        <Text style={[stylist.feedtitle, {flexWrap: 'wrap'}]} numberOfLines={4} ellipsizeMode="tail">{item1}</Text>
+                        <Text style={[stylist.feedtitle, {opacity: 0.7}]}>{sources[index1]}</Text>
+                    </View>
+                </View>
+            </View>
+                <View style={{alignItems: 'center'}}>
+                <View style={{height: 1, backgroundColor: "#FFFF", width: '80%', opacity: 0.1}}/>
+                </View>
+            </TouchableOpacity>
+            );
+            })}
+        </ScrollView>
         <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "#1e1e1e", width: '100%'}}/>
         <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-around',alignItems: "center", paddingBottom: 20}}>
