@@ -9,7 +9,7 @@ export default function index() {
     const username = params.username;
     console.log("username from params, ", username);
     const [Title, setTitle] = React.useState([])
-    const [imageUrl, setImage] = React.useState([])
+    const [bigImURL, setImage] = React.useState([])
     const [Content, setContent] = React.useState([])
     const [idx, setIdx] = React.useState(0)
     const [sources, setSources] = React.useState([])
@@ -29,7 +29,7 @@ export default function index() {
     }
 
     
-     useEffect(() => {
+    useEffect(() => {
         getSavedArticles();
     }, []);
 
@@ -48,7 +48,6 @@ export default function index() {
             setContent(articles.map((article: any) => article.contents))
             setSources(articles.map((article: any) => article.sources))
             setByLine(articles.map((article: any) => article.byLine))
-            console.log(Title)
            
         }
         else{
@@ -59,7 +58,7 @@ export default function index() {
     const Article = (articleIndex: number) => {
         router.push({pathname: "/(routes)/Article" as any,
             params: {
-                imageUrl: imageUrl[articleIndex], 
+                bigImg: bigImURL[articleIndex], 
                 Content: Content[articleIndex], 
                 Title: Title[articleIndex], 
                 idx: articleIndex,
@@ -78,12 +77,11 @@ export default function index() {
         <Text style={[stylist.feedtitleH, {marginTop: 30}, {fontSize: 25}]}>Saved Articles</Text>
         <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 20, zIndex: 1}}/>
         <ScrollView >
-        {Title.map((item1, index1) => { if (index1==0) return null;
-            return (
+        {Title.map((item1, index1) =>
             <TouchableOpacity onPress={() => {setIdx(index1); Article(index1);}} key={index1}>
             <View style={stylist.articleContainer}>
                 <View style={[stylist.CenterPopUp, {flexDirection:'row'}]}>
-                    <Image source={{uri: imageUrl[index1]}}
+                    <Image source={{uri: bigImURL[index1]}}
                             style={{width: 150, height: 80, borderRadius: 7}}
                             resizeMode="cover"/>
                     <View style={{flex: 1}} >
@@ -96,8 +94,7 @@ export default function index() {
                 <View style={{height: 1, backgroundColor: "#FFFF", width: '80%', opacity: 0.1}}/>
                 </View>
             </TouchableOpacity>
-            );
-            })}
+            )}
         </ScrollView>
         <View style={{position: 'absolute', bottom: 100, height: 1, backgroundColor: "#1e1e1e", width: '100%'}}/>
         <View style={{position: 'absolute', bottom: 0, width: '100%'}}>

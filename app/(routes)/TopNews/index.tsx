@@ -2,7 +2,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import RNUrlPreview from 'react-native-preview-url';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
@@ -15,6 +14,7 @@ export default function index() {
     const [idx, setIdx] = React.useState(0)
     const [sources, setSources] = React.useState([])
     const [byLine, setByLine] = React.useState([])
+    const [bigImg, setBigImg] = React.useState([])
     useEffect(() => {
             getArticles();
         }, []);
@@ -31,6 +31,8 @@ export default function index() {
             setContent(data.contents)
             setSources(data.sources)
             setByLine(data.byLine)
+            setBigImg(data.bigImUrls)
+            console.log(bigImg)
             return data
         }
     }
@@ -55,7 +57,9 @@ export default function index() {
                 idx: articleIndex,
                 byLine: byLine[articleIndex],
                 username: username,
-                sources: sources[articleIndex]}
+                sources: sources[articleIndex],
+                bigImg: bigImg[articleIndex]
+            }
         });
     }
   return (
@@ -67,22 +71,30 @@ export default function index() {
             <Text style={[stylist.feedtitleH, {marginTop: 30}, {fontSize: 25}]}>Top Stories</Text>
             <View style={{position: 'absolute',top: 120, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 20, zIndex: 1}}/>
             <ScrollView >
-                
-                <RNUrlPreview 
-                    url={"https://www.google.com/"}
-                    titleStyle={{color: '#FFFF', fontFamily: 'inter'}}
-                    descriptionStyle={{color: '#FFFF', opacity: 0.7, fontFamily: 'inter'}}
-                    containerStyle={{width: '100%', height: '80%'}}
-                />
+                <TouchableOpacity onPress={() => {setIdx(0); Article(0);}}>
+                <View style={{position: 'relative'}}>
+                <Image source={{uri: bigImg[0]}}
+                    style={{flex: 1, width: '100%', height: 240, borderRadius: 7, marginTop: 20, opacity: 0.7}}
+                    resizeMode="cover"/>
+                <View style={[stylist.CenterPopUp, {flexDirection:'row'}]}>
+                    <View style={{position: 'absolute', bottom: 40, marginRight: 170, marginBottom: 10, right: 10}}>
+                        <Text style={[stylist.feedtitle, {fontWeight: "bold"}]}>{sources[0]}</Text>
+                    </View>
+                    <View style={{position: 'absolute', bottom: 10, left: 10, right: 40}} >
+                        <Text style={[stylist.feedtitle, {fontWeight: "bold"}, {flexWrap: 'wrap'}]} numberOfLines={3} ellipsizeMode="tail">{Title[0]}</Text>
+                    </View>
+                </View>
+                </View>
+                </TouchableOpacity>
                 <View style={{alignItems: 'center'}}>
-                <View style={{height: 1, backgroundColor: "#FFFF", width: '90%', opacity: 0.7}}/>
+                <View style={{height: 1, backgroundColor: "#FFFF", width: '90%', opacity: 0.7, marginTop: 20}}/>
                 </View>
                 {Title.map((item1, index1) => { if (index1==0) return null;
                 return (
                 <TouchableOpacity onPress={() => {setIdx(index1); Article(index1);}} key={index1}>
                 <View style={stylist.articleContainer}>
                     <View style={[stylist.CenterPopUp, {flexDirection:'row'}]}>
-                        <Image source={{uri: imageUrl[index1]}}
+                        <Image source={{uri: bigImg[index1]}}
                                 style={{width: 150, height: 80, borderRadius: 7}}
                                 resizeMode="cover"/>
                         <View style={{flex: 1}} >

@@ -94,13 +94,19 @@ export default function Dashboard() {
         });
     }
 
+    const Bookmarked = () => {
+        router.replace({pathname: "/(routes)/Bookmarked",
+            params: {username: username}
+        });
+    }
+
   return (
     <SafeAreaView style={stylist.container}>
       <Image    
               source={require("@/assets/onboarding/onboarding.jpg")}
               style={stylist.OnboardPage} />
         <View style={{flexDirection:'row', alignItems: 'center'}}>
-        <Text style={[stylist.feedtitleH, {marginTop: 30}, {fontSize: 25},{marginLeft: 120}]}>Your Feed</Text>
+        <Text style={[stylist.feedtitleH, {marginTop: 30}, {fontSize: 25},{marginLeft: 120}]}>Your Links</Text>
         <View style={{position: 'absolute',top: 80, height: 1, backgroundColor: "#1e1e1e", width: '100%', marginBottom: 10, zIndex: 1}}/>
         <Pressable onPress={() => addButtonPressed(true)}>
             <View style={[{marginLeft: 60}]}>
@@ -137,8 +143,6 @@ export default function Dashboard() {
                 <Text style={stylist.submitTextSign}>cancel</Text>
             </Pressable>
             </View>
-            <View>
-            </View>
             </View>
             </View>
         </Modal>
@@ -163,10 +167,11 @@ export default function Dashboard() {
         <ScrollView>
         <View style={stylist.CenterPopUp}>
             { urllist.map((item, index) => {if (item == "") return null; return (
+                // @ts-ignore
                 <TouchableWithoutFeedback key={index} onLongPress={()=> {
                     URLdelPop(true)
                     URLselected(item)}}>
-                <View key={index}>
+                <View>
                 <RNUrlPreview url={item}
                 containerStyle={{width: '95%', backgroundColor: '#1e1e1e', marginTop: 20 }}
                 titleStyle={{color: '#FFFF', fontFamily: 'inter'}}
@@ -190,7 +195,7 @@ export default function Dashboard() {
                     />
                 <Text style={[stylist.feedtitle]}>Feed</Text>
             </Pressable>
-            <Pressable onPress={NewsFeed} style={{alignItems: "center", flex: 0.7}}>
+            <Pressable onPress={Bookmarked} style={{alignItems: "center", flex: 0.7}}>
                 <MaterialCommunityIcons
                     name= "bookmark"
                     size={40}
