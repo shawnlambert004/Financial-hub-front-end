@@ -92,7 +92,7 @@ export default function index() {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer ***',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
